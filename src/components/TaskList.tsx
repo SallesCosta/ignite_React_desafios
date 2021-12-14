@@ -23,16 +23,23 @@ export function TaskList() {
       isComplete: false
     }
 
-    setTasks(oldState => [...oldState, newTask]);
+    setTasks(oldXtate => [...oldXtate, newTask]);
     setNewTaskTitle('')
   }
 
   function handleToggleTaskCompletion(id: number) {
-    // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
+    const selecionado = tasks.map(item => item.id === id
+      ? {
+      ...item,
+      isComplete: !item.isComplete
+    }
+    : item) 
+    setTasks(selecionado)
   }
 
   function handleRemoveTask(id: number) {
-    // Remova uma task da listagem pelo ID
+    const selecionado = tasks.filter(item => item.id!==id) 
+    setTasks(selecionado)
   }
 
   return (
