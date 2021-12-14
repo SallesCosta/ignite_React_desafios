@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useState, KeyboardEvent  } from 'react'
 
 import '../styles/tasklist.scss'
 
 import { FiTrash, FiCheckSquare } from 'react-icons/fi'
+
+
 
 interface Task {
   id: number;
@@ -42,6 +44,15 @@ export function TaskList() {
     setTasks(selecionado)
   }
 
+  const enterPressed = (e: KeyboardEvent<HTMLInputElement> ) => {
+    const keyCode = e.which || e.keyCode
+    const ENTER = 13
+  
+    if (keyCode === ENTER) {
+      handleCreateNewTask()
+    }
+  }
+
   return (
     <section className="task-list container">
       <header>
@@ -50,6 +61,7 @@ export function TaskList() {
         <div className="input-group">
           <input 
             type="text" 
+            onKeyUp={enterPressed}
             placeholder="Adicionar novo todo" 
             onChange={(e) => setNewTaskTitle(e.target.value)}
             value={newTaskTitle}
